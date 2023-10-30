@@ -4,6 +4,7 @@ import com.clinica.pacientes.model.Paciente;
 import com.clinica.pacientes.repository.IPacienteRepository;
 import com.clinica.pacientes.service.IPacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ import java.util.List;
  * @see IPacienteService
  * @see Paciente
  */
+
+@Component
 public class PacienteServiceImpl implements IPacienteService {
 
     @Autowired
@@ -56,7 +59,7 @@ public class PacienteServiceImpl implements IPacienteService {
      * {@inheritDoc}
      */
     @Override
-    public void editPaciente(Paciente pac) {
+    public void editPaciente(Long id_original, Paciente pac) {
         this.savePaciente(pac);
     }
 }

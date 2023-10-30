@@ -1,6 +1,8 @@
 package com.clinica.pacientes.service;
 
 import com.clinica.pacientes.model.Paciente;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 /**
@@ -10,6 +12,8 @@ import java.util.List;
  *
  * @see Paciente
  */
+
+@Service
 public interface IPacienteService {
     /**
      * Obtiene un listado de pacientes de la base de datos y lo devuelve
@@ -39,8 +43,10 @@ public interface IPacienteService {
 
     /**
      * Permite guardar los datos modificados de un paciente
-     * @param pac Paciente cuyos datos han sido editados y que van a ser guardados en la base de datos
+     *
+     * @param id_original
+     * @param pac         Paciente cuyos datos han sido editados y que van a ser guardados en la base de datos
      */
-    public void editPaciente(Paciente pac);
+    public void editPaciente(Long id_original, Paciente pac);
 
 }
