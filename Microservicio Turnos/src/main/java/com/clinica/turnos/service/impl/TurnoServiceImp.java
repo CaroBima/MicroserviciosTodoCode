@@ -1,10 +1,12 @@
 package com.clinica.turnos.service.impl;
 
+import com.clinica.turnos.model.Paciente;
 import com.clinica.turnos.model.TurnoEntity;
 import com.clinica.turnos.repository.ITurnoRepository;
 import com.clinica.turnos.service.ITurnoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,6 +17,9 @@ public class TurnoServiceImp implements ITurnoService {
     @Autowired
     private ITurnoRepository turnoRepository;
 
+    @Autowired
+    private RestTemplate apiConsumir;
+
     @Override
     public List<TurnoEntity> getTurnos() {
         return turnoRepository.findAll();
@@ -23,13 +28,13 @@ public class TurnoServiceImp implements ITurnoService {
     @Override
     public void saveTurno(LocalDate fecha, String tratamiento, String dniPaciente) {
         //buscar el paciente en la api de pacientes
-        //Paciente Pac = // buscar en la api
-        //String nombreCompletoPaciente = //consumido desde la api
+        Paciente pac = apiConsumir.getForObject("http://localhost:9001/pacientes/traerdni/" + dniPaciente, Paciente.class);
+        String nombreCompletoPaciente = pac.getNombre() + " " + pac.getApellido();
 
         TurnoEntity turno = new TurnoEntity();
         turno.setFecha(fecha);
         turno.setTratamiento(tratamiento);
-        //turno.setNombreCompletoPaciente();
+        turno.setNombreCompletoPaciente(nombreCompletoPaciente);
 
         turnoRepository.save(turno);
     }

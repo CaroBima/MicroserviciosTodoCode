@@ -1,5 +1,6 @@
 package com.clinica.turnos.controller;
 
+import com.clinica.turnos.dto.TurnoDTO;
 import com.clinica.turnos.model.TurnoEntity;
 import com.clinica.turnos.service.ITurnoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,9 @@ public class TurnoController {
     private ITurnoService turnoService;
 
     @PostMapping("/crear")
-    public String crearTurno(@RequestBody LocalDate fecha,
-                             @RequestBody String tratamiento,
-                             @RequestBody String dniPaciente){
+    public String crearTurno(@RequestBody TurnoDTO turno){
 
-        turnoService.saveTurno(fecha, tratamiento, dniPaciente);
+        turnoService.saveTurno(turno.getFecha(), turno.getTratamiento(), turno.getDniPaciente());
 
         return "Turno creado correctamente";
     }
