@@ -43,6 +43,10 @@ public class PacienteController {
         return pacienteService.getPacientes();
     }
 
+    @GetMapping("traerdni/{dni}")
+    public Paciente traerPacienteDni(@PathVariable String dni){
+        return pacienteService.findPacienteDni(dni);
+    }
     /**
      * Permite borrar un paciente cuyo id se pasa por parámetro
      * @param id Clave identificatoria del paciente que se desea borrar de la base de datos

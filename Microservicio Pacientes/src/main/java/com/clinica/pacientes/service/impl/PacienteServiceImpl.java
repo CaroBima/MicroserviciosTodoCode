@@ -5,6 +5,7 @@ import com.clinica.pacientes.repository.IPacienteRepository;
 import com.clinica.pacientes.service.IPacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -22,6 +23,9 @@ public class PacienteServiceImpl implements IPacienteService {
 
     @Autowired
     private IPacienteRepository pacienteRepository;
+
+    @Autowired
+    private RestTemplate apiConsumir;
 
     /**
      * {@inheritDoc}
@@ -61,5 +65,10 @@ public class PacienteServiceImpl implements IPacienteService {
     @Override
     public void editPaciente(Long id_original, Paciente pac) {
         this.savePaciente(pac);
+    }
+
+    @Override
+    public Paciente findPacienteDni(String dni) {
+        return pacienteRepository.findByDni(dni);
     }
 }

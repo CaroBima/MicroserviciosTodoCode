@@ -49,4 +49,5 @@ public interface IPacienteService {
      */
     public void editPaciente(Long id_original, Paciente pac);
 
+    Paciente findPacienteDni(String dni);
 }
