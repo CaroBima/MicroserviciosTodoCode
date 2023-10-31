@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IPacienteRepository extends JpaRepository<Paciente, Long> {
-    @Query(value = "Select paciente From Paciente paciente where paciente.dni = dni")
+    @Query(value = "SELECT * FROM paciente pac WHERE pac.dni = :dni", nativeQuery = true)
     Paciente findByDni(@Param("dni") String dni);
+
 }
